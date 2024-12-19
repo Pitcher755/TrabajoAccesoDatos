@@ -39,25 +39,28 @@ public class LectorXML {
             documento.getDocumentElement().normalize();
 
             // Obtener todos los elementos "contrato" del XML
-            NodeList listaNodos = documento.getElementsByTagName("contrato");
+            NodeList filas = documento.getElementsByTagName("Row");
 
             // Crear una instancia del ContratoAD para guardar los datos en la base de datos.
             ContratoAD contratoAD = new ContratoAD();
 
-            // Recorrer todos los elementos "contrato"
-            for (int i = 0; i < listaNodos.getLength(); i++) {
-                Node nodo = listaNodos.item(i);
+            // Recorrer todas las filas
+            for (int i = 1; i < filas.getLength(); i++) { // i = 1 para saltar la fila de los encabezados
+                Node fila = filas.item(i);
 
-                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
-                    Element elemento = (Element) nodo;
+                if (fila.getNodeType() == Node.ELEMENT_NODE) {
+                    Element elementoFila = (Element) fila;
 
-                    // Leer el valor de cada etiqueta del contrato <nif>, <empresa>, <descripción>...
-                    String nif = obtenerContenidoEtiqueta(elemento, "nif");
-                    String empresa = obtenerContenidoEtiqueta(elemento, "empresa");
-                    String descripcion = obtenerContenidoEtiqueta(elemento, "descripcion");
-                    String tipoContrato = obtenerContenidoEtiqueta(elemento, "tipoContrato");
-                    String fecha = obtenerContenidoEtiqueta(elemento, "fecha");
-                    String precio = obtenerContenidoEtiqueta(elemento, "precio");
+                    // Coger todas las celdas dentro de la fila
+                    NodeList celdas = elementoFila.getElementsByTagName("Cell");
+                    
+                    // Leer los valores
+                    String nif = obtenerValorCelda(celdas, 0); 
+                    String empresa = obtenerValorCelda(celdas, 1);
+                    String descripcion = obtenerValorCelda(celdas, 2);
+                    String tipoContrato = obtenerValorCelda(celdas, 7);
+                    String fecha = obtenerValorCelda(celdas, 4);
+                    String precio = obtenerValorCelda(celdas, 5);
 
                     // Crear un objeto Contrato con los datos leidos
                     Contrato contrato = new Contrato(nif, empresa, descripcion, tipoContrato, fecha, precio);
@@ -75,16 +78,21 @@ public class LectorXML {
     /**
      * Obtiene el contenido de una etiqueta dentro de un elemento XML.
      *
-     * @param elemento Elemento XML que contiene la etiqueta.
-     * @param etiqueta Nombre de la etiqueta a leer.
-     * @return Contenido de la etiqueta o una cadena vacía si no existe.
+     * @param celdas Lista de nodos de celdas en la fila.
+     * @param indice Índice de la celda a leer
+     * @return Contenido del nodo Data dentro de una celda, o una cadena vacía si no existe.
      */
-    private String obtenerContenidoEtiqueta(Element elemento, String etiqueta) {
-        NodeList listaNodo = elemento.getElementsByTagName(etiqueta);
-        if (listaNodo.getLength() > 0) {
-            return listaNodo.item(0).getTextContent(); //*****************************************************
-        } else {
-            return "";
-        }
+    private String obtenerValorCelda(NodeList celdas, int indice) {
+        if (indice < celdas.getLength()){
+            Node celda = celdas.item(indice);
+            if (celda.getNodeType() == Node.ELEMENT_NODE){
+                Element elementoCelda = (Element) celda;
+                NodeList datos = elementoCelda.getElementsByTagName("Data");
+                if (datos.getLength() > 0){
+                    return datos.item(0).getTextContent(); //+++++++++++*************++++++++++++++***********
+                }
+            }
+        } 
+        return ""; // Si no existe el nodo, devuelve cadena vacía
     }
 }
