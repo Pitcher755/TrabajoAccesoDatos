@@ -6,6 +6,8 @@ package Servicios;
 
 import AccesoDatos.ContratoAD;
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import modeloContrato.Contrato;
@@ -53,13 +55,33 @@ public class LectorXML {
 
                     // Coger todas las celdas dentro de la fila
                     NodeList celdas = elementoFila.getElementsByTagName("Cell");
-                    
+
                     // Leer los valores
-                    String nif = obtenerValorCelda(celdas, 0); 
+                    String nif = obtenerValorCelda(celdas, 0);
                     String empresa = obtenerValorCelda(celdas, 1);
                     String descripcion = obtenerValorCelda(celdas, 2);
                     String tipoContrato = obtenerValorCelda(celdas, 7);
                     String fecha = obtenerValorCelda(celdas, 4);
+
+                    // Cambiar el formato de las fechas para intentar corregir la inconsistencia entre datos
+                    try {
+                        // Formatos de fecha
+                        SimpleDateFormat formatoISO = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+                        SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd.MM.yyyy");
+                        SimpleDateFormat formatoSalida = new SimpleDateFormat("yyyy-MM-dd"); // Formato de MySQL
+                        fecha = formatoSalida.format(formatoEntrada.parse(fecha));
+                        
+                        // Probar con el formato ISO
+                        try {
+                            fecha = formatoSalida.format(formatoISO.parse(fecha));
+                        } catch (ParseException e1) {
+                            // Intentar con formato dd.MM.yyyy
+                            fecha = formatoSalida.format(formatoEntrada.parse(fecha));
+                        }
+                    } catch (ParseException e) {
+                        System.err.println("Formato de fecha inválido: " + fecha);
+                        fecha = "0000-00-00"; // Formato de My SQL
+                    }
                     String precio = obtenerValorCelda(celdas, 5);
 
                     // Crear un objeto Contrato con los datos leidos
@@ -80,19 +102,20 @@ public class LectorXML {
      *
      * @param celdas Lista de nodos de celdas en la fila.
      * @param indice Índice de la celda a leer
-     * @return Contenido del nodo Data dentro de una celda, o una cadena vacía si no existe.
+     * @return Contenido del nodo Data dentro de una celda, o una cadena vacía
+     * si no existe.
      */
     private String obtenerValorCelda(NodeList celdas, int indice) {
-        if (indice < celdas.getLength()){
+        if (indice < celdas.getLength()) {
             Node celda = celdas.item(indice);
-            if (celda.getNodeType() == Node.ELEMENT_NODE){
+            if (celda.getNodeType() == Node.ELEMENT_NODE) {
                 Element elementoCelda = (Element) celda;
                 NodeList datos = elementoCelda.getElementsByTagName("Data");
-                if (datos.getLength() > 0){
+                if (datos.getLength() > 0) {
                     return datos.item(0).getTextContent(); //+++++++++++*************++++++++++++++***********
                 }
             }
-        } 
+        }
         return ""; // Si no existe el nodo, devuelve cadena vacía
     }
 }
