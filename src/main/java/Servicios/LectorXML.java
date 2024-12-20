@@ -8,6 +8,7 @@ import AccesoDatos.ContratoAD;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import modeloContrato.Contrato;
@@ -57,20 +58,20 @@ public class LectorXML {
                     NodeList celdas = elementoFila.getElementsByTagName("Cell");
 
                     try {
-                    // Leer los valores
-                    String nif = obtenerValorCelda(celdas, 0);
-                    String empresa = obtenerValorCelda(celdas, 1);
-                    String descripcion = obtenerValorCelda(celdas, 2);
-                    String tipoContrato = obtenerValorCelda(celdas, 7);
-                    String fecha = formatearFecha(obtenerValorCelda(celdas, 4));
-                    String precio = formatearPrecio(obtenerValorCelda(celdas, 5));
+                        // Leer los valores
+                        String nif = obtenerValorCelda(celdas, 0);
+                        String empresa = obtenerValorCelda(celdas, 1);
+                        String descripcion = obtenerValorCelda(celdas, 2);
+                        String tipoContrato = obtenerValorCelda(celdas, 7);
+                        String fecha = formatearFecha(obtenerValorCelda(celdas, 4));
+                        String precio = formatearPrecio(obtenerValorCelda(celdas, 5));
 
-                    // Crear un objeto Contrato con los datos leidos
-                    Contrato contrato = new Contrato(nif, empresa, descripcion, tipoContrato, fecha, precio);
+                        // Crear un objeto Contrato con los datos leidos
+                        Contrato contrato = new Contrato(nif, empresa, descripcion, tipoContrato, fecha, precio);
 
-                    // Guardar el contrato a la base de datos
-                    contratoAD.insertarContrato(contrato);
-                    } catch (ParseException | NumberFormatException e){
+                        // Guardar el contrato a la base de datos
+                        contratoAD.insertarContrato(contrato);
+                    } catch (ParseException | NumberFormatException e) {
                         System.err.println("Error en la fila " + i + ": " + e.getMessage());
                     }
                 }
@@ -112,15 +113,34 @@ public class LectorXML {
      * esperado.
      */
     private String formatearFecha(String fechaXML) throws ParseException {
-        SimpleDateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
-        SimpleDateFormat formatoSalida = new SimpleDateFormat("yyyy-MM-dd");
-        return formatoSalida.format(formatoEntrada.parse(fechaXML));
+        // Formatos de fechas
+        String[] formatos = {
+            "yyyy-MM-dd'T'HH:mm:ss.SSS", // Formato original con "T"
+            "yyyy-MM-dd", // Formato ISO simple
+            "dd.MM.yyyy" // Formato con puntos
+        };
+
+        // Probar los formatos
+        for (String formato :formatos){
+            try {
+                SimpleDateFormat formatoEntrada = new SimpleDateFormat(formato);
+                formatoEntrada.setLenient(false); // Comprueba que la fechas sean válidas
+                SimpleDateFormat formatoSalida = new SimpleDateFormat("yyyy-MM-dd");
+                Date fecha = formatoEntrada.parse(fechaXML);
+                return formatoSalida.format(fecha);
+            } catch (ParseException e) {
+                
+            }
+        }
+       
+        // Si no coincide con ningún formato, lanzar excepcion
+        throw new ParseException("Formato de fecha no válido: " + fechaXML, 0);
     }
 
     /**
-     * Quita puntos y cambia las comas por punto para los decimales, convierte el 
-     * precio al formato compatible con la base de datos.
-     * 
+     * Quita puntos y cambia las comas por punto para los decimales, convierte
+     * el precio al formato compatible con la base de datos.
+     *
      * @param precioXML Precio en el formato del XML "1200,50 €".
      * @return Precio limpio como String "1250.00".
      * @throws NumberFormatException Excepción si el precio no es valido.
