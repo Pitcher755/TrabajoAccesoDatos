@@ -56,39 +56,23 @@ public class LectorXML {
                     // Coger todas las celdas dentro de la fila
                     NodeList celdas = elementoFila.getElementsByTagName("Cell");
 
+                    try {
                     // Leer los valores
                     String nif = obtenerValorCelda(celdas, 0);
                     String empresa = obtenerValorCelda(celdas, 1);
                     String descripcion = obtenerValorCelda(celdas, 2);
                     String tipoContrato = obtenerValorCelda(celdas, 7);
-                    String fecha = obtenerValorCelda(celdas, 4);
-
-                    // Cambiar el formato de las fechas para intentar corregir la inconsistencia entre datos
-                    try {
-                        // Formatos de fecha
-                        SimpleDateFormat formatoISO = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
-                        SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd.MM.yyyy");
-                        SimpleDateFormat formatoSalida = new SimpleDateFormat("yyyy-MM-dd"); // Formato de MySQL
-                        fecha = formatoSalida.format(formatoEntrada.parse(fecha));
-                        
-                        // Probar con el formato ISO
-                        try {
-                            fecha = formatoSalida.format(formatoISO.parse(fecha));
-                        } catch (ParseException e1) {
-                            // Intentar con formato dd.MM.yyyy
-                            fecha = formatoSalida.format(formatoEntrada.parse(fecha));
-                        }
-                    } catch (ParseException e) {
-                        System.err.println("Formato de fecha inválido: " + fecha);
-                        fecha = "0000-00-00"; // Formato de My SQL
-                    }
-                    String precio = obtenerValorCelda(celdas, 5);
+                    String fecha = formatearFecha(obtenerValorCelda(celdas, 4));
+                    String precio = formatearPrecio(obtenerValorCelda(celdas, 5));
 
                     // Crear un objeto Contrato con los datos leidos
                     Contrato contrato = new Contrato(nif, empresa, descripcion, tipoContrato, fecha, precio);
 
                     // Guardar el contrato a la base de datos
                     contratoAD.insertarContrato(contrato);
+                    } catch (ParseException | NumberFormatException e){
+                        System.err.println("Error en la fila " + i + ": " + e.getMessage());
+                    }
                 }
             }
         } catch (Exception e) {
@@ -112,10 +96,40 @@ public class LectorXML {
                 Element elementoCelda = (Element) celda;
                 NodeList datos = elementoCelda.getElementsByTagName("Data");
                 if (datos.getLength() > 0) {
-                    return datos.item(0).getTextContent(); //+++++++++++*************++++++++++++++***********
+                    return datos.item(0).getTextContent();
                 }
             }
         }
         return ""; // Si no existe el nodo, devuelve cadena vacía
     }
+
+    /**
+     * Formatea la fecha para hacerla compatible con la base de datos.
+     *
+     * @param fechaXML Fecha en formato "yyyy-MM-dd'T'HH:mm:ss.SSS" del XML.
+     * @return Fecha formateada para MySQL "yyyy-MM-dd".
+     * @throws ParseException Excepción si la fecha no tiene el formato
+     * esperado.
+     */
+    private String formatearFecha(String fechaXML) throws ParseException {
+        SimpleDateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+        SimpleDateFormat formatoSalida = new SimpleDateFormat("yyyy-MM-dd");
+        return formatoSalida.format(formatoEntrada.parse(fechaXML));
+    }
+
+    /**
+     * Quita puntos y cambia las comas por punto para los decimales, convierte el 
+     * precio al formato compatible con la base de datos.
+     * 
+     * @param precioXML Precio en el formato del XML "1200,50 €".
+     * @return Precio limpio como String "1250.00".
+     * @throws NumberFormatException Excepción si el precio no es valido.
+     */
+    private String formatearPrecio(String precioXML) throws NumberFormatException {
+        if (precioXML == null || precioXML.isEmpty()) {
+            throw new NumberFormatException("El precio es nulo o está vacío");
+        }
+        return precioXML.replace(".", "").replace(",", ".").replace("€", "");
+    }
+
 }
