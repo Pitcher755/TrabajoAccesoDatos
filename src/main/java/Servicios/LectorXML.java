@@ -41,7 +41,7 @@ public class LectorXML {
             // Nomralización del documento
             documento.getDocumentElement().normalize();
 
-            // Obtener todos los elementos "contrato" del XML
+            // Obtener todos los elementos "contratos" del XML
             NodeList filas = documento.getElementsByTagName("Row");
 
             // Crear una instancia del ContratoAD para guardar los datos en la base de datos.
