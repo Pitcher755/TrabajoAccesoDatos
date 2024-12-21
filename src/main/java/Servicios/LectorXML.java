@@ -64,7 +64,9 @@ public class LectorXML {
                         String descripcion = obtenerValorCelda(celdas, 2);
                         String tipoContrato = obtenerValorCelda(celdas, 7);
                         String fecha = formatearFecha(obtenerValorCelda(celdas, 4));
-                        String precio = formatearPrecio(obtenerValorCelda(celdas, 5));
+                        String precio= formatearPrecio(obtenerValorCelda(celdas, 5));
+                        
+
 
                         // Crear un objeto Contrato con los datos leidos
                         Contrato contrato = new Contrato(nif, empresa, descripcion, tipoContrato, fecha, precio);
@@ -133,8 +135,9 @@ public class LectorXML {
             }
         }
        
-        // Si no coincide con ningún formato, lanzar excepcion
-        throw new ParseException("Formato de fecha no válido: " + fechaXML, 0);
+        // Si no coincide con ningún formato, agregar como fecha null
+        return null;
+        //throw new ParseException("Formato de fecha no válido: " + fechaXML, 0);
     }
 
     /**
@@ -145,11 +148,18 @@ public class LectorXML {
      * @return Precio limpio como String "1250.00".
      * @throws NumberFormatException Excepción si el precio no es valido.
      */
-    private String formatearPrecio(String precioXML) throws NumberFormatException {
+    private String formatearPrecio(String precioXML){
         if (precioXML == null || precioXML.isEmpty()) {
-            throw new NumberFormatException("El precio es nulo o está vacío");
+            return null;
         }
-        return precioXML.replace(".", "").replace(",", ".").replace("€", "");
+        try {
+            //return precioXML.replace(".", "").replace(",", ".").replace("€", "");
+            String precioFormateado = precioXML.replace(".", "").replace(",", ".").replace("€", "");
+            Double.parseDouble(precioFormateado); // Comprueba si es un número válido
+            return precioFormateado;
+        } catch (NumberFormatException e) {
+            // Si el formato no es un número o es nulo devolver null
+            return null;
+        }        
     }
-
 }
