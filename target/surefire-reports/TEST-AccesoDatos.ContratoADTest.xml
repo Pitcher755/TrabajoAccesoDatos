@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="configuracion.ConexionBaseDatosTest" time="0.744" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="AccesoDatos.ContratoADTest" time="0.612" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,9 +15,9 @@
     <property name="user.country" value="ES"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-23\bin"/>
-    <property name="sun.java.command" value="C:\Users\canta\AppData\Local\Temp\surefire4563016850456531753\surefirebooter-20241224170646500_3.jar C:\Users\canta\AppData\Local\Temp\surefire4563016850456531753 2024-12-24T17-06-46_325-jvmRun1 surefire-20241224170646500_1tmp surefire_0-20241224170646500_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\canta\AppData\Local\Temp\surefire2721170881411618183\surefirebooter-20241224182014639_3.jar C:\Users\canta\AppData\Local\Temp\surefire2721170881411618183 2024-12-24T18-20-14_527-jvmRun1 surefire-20241224182014639_1tmp surefire_0-20241224182014639_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="configuracion.ConexionBaseDatosTest"/>
+    <property name="test" value="AccesoDatos.ContratoADTest"/>
     <property name="surefire.test.class.path" value="C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\test-classes;C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\classes;C:\Users\canta\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\canta\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\canta\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\canta\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\canta\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\canta\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\canta\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\canta\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\canta\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\canta"/>
@@ -31,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\canta\AppData\Local\Temp\surefire4563016850456531753\surefirebooter-20241224170646500_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\canta\AppData\Local\Temp\surefire2721170881411618183\surefirebooter-20241224182014639_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="23.0.1+11-39"/>
@@ -60,12 +60,13 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="testConexion" classname="configuracion.ConexionBaseDatosTest" time="0.7">
-    <system-out><![CDATA[Conexión cerrada correctamente.
+  <testcase name="testInsertarContrato" classname="AccesoDatos.ContratoADTest" time="0.507">
+    <system-out><![CDATA[Contrato insertado correctamente: 123456789F
 ]]></system-out>
   </testcase>
-  <testcase name="testCerrarConexion" classname="configuracion.ConexionBaseDatosTest" time="0.019">
-    <system-out><![CDATA[Conexión cerrada correctamente.
+  <testcase name="testEncontrarTodo" classname="AccesoDatos.ContratoADTest" time="0.09">
+    <system-out><![CDATA[Contrato insertado correctamente: 123456789F
+Contrato insertado correctamente: 987654321F
 ]]></system-out>
   </testcase>
 </testsuite>

@@ -11,9 +11,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Clase de prueba para la clase ConexionBaseDatos. Comprueba si funciona la
- * conexión a la base de datos.
- *
+ * Clase de prueba para la clase ConexionBaseDatos. 
+ * Esta clase omprueba si funciona la conexión a la base de datos, probando
+ * que se realice la conexión y que los errores se manejen correctamente.
+ * 
  * @author JFG
  */
 public class ConexionBaseDatosTest {

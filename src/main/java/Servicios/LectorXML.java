@@ -18,7 +18,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * Servicio para leer y procesar un archivo XML, guardando sus datos en una base
+ * Servicio que lee y procesa un archivo XML, guardando sus datos en una base
  * de datos.
  *
  * @author JFG

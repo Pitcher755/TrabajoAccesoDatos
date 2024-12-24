@@ -104,7 +104,7 @@ public class ContratoAD {
 
     /**
      * Cierra los recursos utilizados en las operaciones con la base de datos.
-     * 
+     *
      * @param conexion Objeto de la clase Connection a cerrar.
      * @param sentenciaSQL Objeto de la clase PreparedStatement a cerrar.
      * @param resultado Objeto Resuslset a cerrar.

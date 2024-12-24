@@ -6,6 +6,7 @@ package modeloContrato;
 
 /**
  * Sirve como modelo para representar un contrato adjudicado.
+ * Incluye información como NIF, empresa, descripción, tipo de contrato, fecha y precio.
  * 
  * @author JFG
  */
@@ -27,7 +28,7 @@ public class Contrato {
         this.precio = precio;
     }
 
-    // Getters y Setters
+    // Getters
     public String getNif() {
         return nif;
     }
@@ -52,6 +53,7 @@ public class Contrato {
         return precio;
     }
 
+    // Setters
     public void setNif(String nif) {
         this.nif = nif;
     }
@@ -74,7 +76,5 @@ public class Contrato {
 
     public void setPrecio(String precio) {
         this.precio = precio;
-    }
-    
-    
+    }       
 }
