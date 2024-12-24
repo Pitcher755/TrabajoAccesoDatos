@@ -49,14 +49,14 @@ public class ContratoAD {
             System.err.println("Error al insertar contrato: " + e.getMessage());
         } finally {
             try {
-                if (sentenciaSQL != null){
+                if (sentenciaSQL != null) {
                     sentenciaSQL.close();
                 }
             } catch (SQLException e) {
                 System.err.println("Error al cerrar la sentencia SQL: " + e.getMessage());
             }
             try {
-                if (conexion != null){
+                if (conexion != null) {
                     conexion.close();
                 }
             } catch (SQLException e) {
@@ -97,28 +97,39 @@ public class ContratoAD {
         } catch (SQLException e) {
             System.err.println("Error al obtener contratos: " + e.getMessage());
         } finally {
-            try {
-                if (resultado != null) {
-                    resultado.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al cerrar ResultSet: " + e.getMessage());
-            }
-            try {
-                if (sentenciaSQL != null) {
-                    sentenciaSQL.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al cerrar la sentencia SQL: " + e.getMessage());
-            }
-            try {
-                if (conexion != null) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al cerrar conexión: " + e.getMessage());
-            }
+            cerrarRecursos(conexion, sentenciaSQL, resultado);
         }
         return contratos; // Devuelve la lista de contratos.
+    }
+
+    /**
+     * Cierra los recursos utilizados en las operaciones con la base de datos.
+     * 
+     * @param conexion Objeto de la clase Connection a cerrar.
+     * @param sentenciaSQL Objeto de la clase PreparedStatement a cerrar.
+     * @param resultado Objeto Resuslset a cerrar.
+     */
+    public void cerrarRecursos(Connection conexion, PreparedStatement sentenciaSQL, ResultSet resultado) {
+        try {
+            if (resultado != null) {
+                resultado.close();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al cerrar ResultSet: " + e.getMessage());
+        }
+        try {
+            if (sentenciaSQL != null) {
+                sentenciaSQL.close();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al cerrar la sentencia SQL: " + e.getMessage());
+        }
+        try {
+            if (conexion != null) {
+                conexion.close();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al cerrar conexión: " + e.getMessage());
+        }
     }
 }
