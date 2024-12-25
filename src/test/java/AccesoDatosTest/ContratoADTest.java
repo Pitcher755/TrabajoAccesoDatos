@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
-package AccesoDatos;
+package AccesoDatosTest;
 
+import AccesoDatos.ContratoAD;
 import AccesoDatos.ContratoAD;
 import configuracion.ConexionBaseDatos;
 import java.sql.Connection;
