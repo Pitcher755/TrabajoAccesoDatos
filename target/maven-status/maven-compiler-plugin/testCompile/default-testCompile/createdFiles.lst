@@ -1,3 +1,4 @@
-configuracion\ConexionBaseDatosTest.class
+ServiciosTest\EscritorXMLTest.class
 ServiciosTest\LectorXMLTest.class
 AccesoDatosTest\ContratoADTest.class
+configuracionTest\ConexionBaseDatosTest.class
