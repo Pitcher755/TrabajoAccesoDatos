@@ -5,7 +5,6 @@
 package AccesoDatosTest;
 
 import AccesoDatos.ContratoAD;
-import AccesoDatos.ContratoAD;
 import configuracion.ConexionBaseDatos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
