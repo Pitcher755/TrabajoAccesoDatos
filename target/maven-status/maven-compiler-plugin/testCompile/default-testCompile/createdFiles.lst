@@ -1,7 +1,7 @@
 modeloContratoTest\ContratoTest.class
 ServiciosTest\LectorXMLTest.class
+AccesoDatosTest\ConexionBaseDatosTest.class
 AccesoDatosTest\ContratoADTest.class
 mainTest\AplicacionTest.class
 ServiciosTest\EscritorXMLTest.class
 ServiciosTest\ProcesadorContratoTest.class
-configuracionTest\ConexionBaseDatosTest.class

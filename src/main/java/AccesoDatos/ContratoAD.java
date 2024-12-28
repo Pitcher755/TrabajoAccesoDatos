@@ -57,20 +57,7 @@ public class ContratoAD {
         } catch (SQLException e) {
             System.err.println("Error al insertar contrato: " + e.getMessage());
         } finally {
-            try {
-                if (sentenciaSQL != null) {
-                    sentenciaSQL.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al cerrar la sentencia SQL: " + e.getMessage());
-            }
-            try {
-                if (conexion != null) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("Error al cerrar la conexión: " + e.getMessage());
-            }
+            cerrarRecursos(conexion, sentenciaSQL, null);
         }
     }
 
