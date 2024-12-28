@@ -18,17 +18,34 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * Servicio que lee y procesa un archivo XML, guardando sus datos en una base
- * de datos.
+ * Servicio que lee y procesa un archivo XML, extrayendo sus datos sobre
+ * contratos y guardandolos en una base de datos.
+ *
+ * Utiliza DOM para analizar el archivo XML y convierte los datos en objetos de
+ * la clase Contrato antes de guardarlos en la base de datos.
  *
  * @author JFG
  */
 public class LectorXML {
 
     /**
+     * Servicio para leer y procesar un archivo XML.
+     * Constructor por defecto no necesita inicialización
+     */
+    public LectorXML() {
+        // Constructor por defecto
+    }
+
+    /**
      * Procesa un arvhivo XML y guarda sus datos en la base de datos.
      *
+     * Este método analiza un archivo XML buscando nodos que reepresentan
+     * contratos, los convierte en objetos de la clase Contrato y utiliza la
+     * clase ContratoAD para guardarlos en la base de datos.
+     *
      * @param rutaArchivo Ruta del archivo XML de origen.
+     * @throws IllegalArgumentException Si la ruta del archivo es inválida.
+     * @throws RuntimeException Si hay un error al procesar el archivo.
      */
     public void procesarXML(String rutaArchivo) {
         try {
@@ -64,9 +81,7 @@ public class LectorXML {
                         String descripcion = obtenerValorCelda(celdas, 2);
                         String tipoContrato = obtenerValorCelda(celdas, 7);
                         String fecha = formatearFecha(obtenerValorCelda(celdas, 4));
-                        String precio= formatearPrecio(obtenerValorCelda(celdas, 5));
-                        
-
+                        String precio = formatearPrecio(obtenerValorCelda(celdas, 5));
 
                         // Crear un objeto Contrato con los datos leidos
                         Contrato contrato = new Contrato(nif, empresa, descripcion, tipoContrato, fecha, precio);
@@ -85,7 +100,7 @@ public class LectorXML {
     }
 
     /**
-     * Obtiene el contenido de una etiqueta dentro de un elemento XML.
+     * Obtiene el contenido de una celda en un nodo XML.
      *
      * @param celdas Lista de nodos de celdas en la fila.
      * @param indice Índice de la celda a leer
@@ -110,9 +125,9 @@ public class LectorXML {
      * Formatea la fecha para hacerla compatible con la base de datos.
      *
      * @param fechaXML Fecha en formato "yyyy-MM-dd'T'HH:mm:ss.SSS" del XML.
-     * @return Fecha formateada para MySQL "yyyy-MM-dd".
-     * @throws ParseException Excepción si la fecha no tiene el formato
-     * esperado.
+     * @return Fecha formateada para MySQL "yyyy-MM-dd", o null si no tiene un
+     * formato conocido.
+     * @throws ParseException Si hay un error al parsear la fecha.
      */
     private String formatearFecha(String fechaXML) throws ParseException {
         // Formatos de fechas
@@ -123,7 +138,7 @@ public class LectorXML {
         };
 
         // Probar los formatos
-        for (String formato :formatos){
+        for (String formato : formatos) {
             try {
                 SimpleDateFormat formatoEntrada = new SimpleDateFormat(formato);
                 formatoEntrada.setLenient(false); // Comprueba que la fechas sean válidas
@@ -131,13 +146,12 @@ public class LectorXML {
                 Date fecha = formatoEntrada.parse(fechaXML);
                 return formatoSalida.format(fecha);
             } catch (ParseException e) {
-                
+
             }
         }
-       
+
         // Si no coincide con ningún formato, agregar como fecha null
         return null;
-        //throw new ParseException("Formato de fecha no válido: " + fechaXML, 0);
     }
 
     /**
@@ -146,9 +160,9 @@ public class LectorXML {
      *
      * @param precioXML Precio en el formato del XML "1200,50 €".
      * @return Precio limpio como String "1250.00".
-     * @throws NumberFormatException Excepción si el precio no es valido.
+     * @throws NumberFormatException Si el precio no es un número válido.
      */
-    private String formatearPrecio(String precioXML){
+    private String formatearPrecio(String precioXML) {
         if (precioXML == null || precioXML.isEmpty()) {
             return null;
         }
@@ -160,6 +174,6 @@ public class LectorXML {
         } catch (NumberFormatException e) {
             // Si el formato no es un número o es nulo devolver null
             return null;
-        }        
+        }
     }
 }

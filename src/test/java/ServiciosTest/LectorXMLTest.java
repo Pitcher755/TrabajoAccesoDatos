@@ -6,7 +6,7 @@ package ServiciosTest;
 
 import AccesoDatos.ContratoAD;
 import Servicios.LectorXML;
-import configuracion.ConexionBaseDatos;
+import AccesoDatos.ConexionBaseDatos;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

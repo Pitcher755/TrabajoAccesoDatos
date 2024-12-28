@@ -17,20 +17,33 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * Servicio para generar un archivo XML de salida con la lista de contratos.
+ * Clase para generar un archivo XML de salida con la lista de contratos.
  * Excluye el campo "tipoContrato" en el archivo generado.
+ *
+ * Esta clase Utiliza DOM para construir y escribir un archivo XML.
  *
  * @author JFG
  */
 public class EscritorXML {
-    
+
     /**
-     * Genera un archivo XML a partir de la lista de contratos del XML de entrada.
-     * 
+     * Constructor por defecto no necesita inicializar manualmente.
+     */
+    public EscritorXML() {
+        // Constructor por defecto
+    }
+
+    /**
+     * Genera un archivo XML a partir de la lista de contratos del XML de
+     * entrada. Este método recorre la lista de contratos y crea un archivo XML
+     * excluyendo el valor "tipoContrato".
+     *
      * @param contratos Lista de contratos que se incluirá en el XML.
      * @param rutaArchivo Ruta donde se creará el archivo XML.
+     * @throws IllegalArgumentException Si la lista de contratos es nula o la
+     * ruta es inválida.
+     * @throws RuntimeException Si hay un error mientras se crea el archivo XML.
      */
-
     public void generarXML(List<Contrato> contratos, String rutaArchivo) {
         try {
             // Configuración del constructor de documentos XML

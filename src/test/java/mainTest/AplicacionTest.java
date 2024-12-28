@@ -6,7 +6,7 @@ package mainTest;
 
 import AccesoDatos.ContratoAD;
 import Servicios.ProcesadorContrato;
-import configuracion.ConexionBaseDatos;
+import AccesoDatos.ConexionBaseDatos;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

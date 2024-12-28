@@ -4,7 +4,6 @@
  */
 package AccesoDatos;
 
-import configuracion.ConexionBaseDatos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,16 +13,26 @@ import java.util.List;
 import modeloContrato.Contrato;
 
 /**
- * Objeto de Acceso a Datos para realizar operaciones con la base de datos.
+ * Objeto de Acceso a Datos para realizar operaciones con la base de datos. Con
+ * métodos para isertar contratos y recuperarlos desde la tabla "contratos".
  *
  * @author JFG
  */
 public class ContratoAD {
 
     /**
-     * Inserta un contrato en la base de datos.
+     * Constructor por defecto no necesita inicializar.
+     */
+    public ContratoAD() {
+        // Constructor por defecto
+    }
+
+    /**
+     * Inserta un contrato en la base de datos. Este método prepara y ejecuta
+     * una consulta SQL para guardar los datos de un contrato.
      *
-     * @param contrato Objeto contrato que se va a insertar en la base de datos.
+     * @param contrato Objeto de la clase Contrato que se va a insertar en la
+     * base de datos.
      */
     public void insertarContrato(Contrato contrato) {
         String consulta = "INSERT INTO contratos (nif, empresa, descripcion, tipoContrato, fecha, precio) VALUES (?, ?, ?, ?, ?, ?)";
@@ -66,9 +75,11 @@ public class ContratoAD {
     }
 
     /**
-     * Recupera todos los contratos de la base de datos
+     * Recupera todos los contratos de la base de datos. Ejecuta una consula SQL
+     * para recuperar los registros de la tabla "contratos."
      *
-     * @return List<Contrato> - Lista de objetos de la clase Contrato.
+     * @return Una lista de obtetos de la clase Contrato, cada uno representa un
+     * registro de la tabla.
      */
     public List<Contrato> encontrarTodo() {
         String consulta = "SELECT nif, empresa, descripcion, tipoContrato, fecha, precio FROM contratos";

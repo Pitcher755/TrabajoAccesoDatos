@@ -1,0 +1,49 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-classpath
+'C:/Users/canta/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar;C:/Users/canta/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'23'
+-sourcepath
+'C:/Users/canta/OneDrive/Escritorio/FP-DAM2/Acceso a datos/Trabajo de enfoque/TrabajoAccesoDatos/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/canta/OneDrive/Escritorio/FP-DAM2/Acceso a datos/Trabajo de enfoque/TrabajoAccesoDatos/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'TrabajoAccesoDatos 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'TrabajoAccesoDatos 1.0-SNAPSHOT API'
+AccesoDatos
+main
+modeloContrato
+Servicios
+C:\Users\canta\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar = 1681683093000
+C:\Users\canta\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar = 1666818740000
+C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\src\main\java = 1735321639031
+C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\reports\apidocs\allclasses-index.html = 1735389234763
+C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\reports\apidocs\allpackages-index.html = 1735389234766
+C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\reports\apidocs\element-list = 1735389234680
+C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\reports\apidocs\help-doc.html = 1735389234794
+C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\reports\apidocs\index-all.html = 1735389234786
+C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\reports\apidocs\index.html = 1735389234753
+C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\reports\apidocs\member-search-index.js = 1735389234770
+C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\reports\apidocs\module-search-index.js = 1735389234767
+C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\reports\apidocs\overview-summary.html = 1735389234791
+C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\reports\apidocs\overview-tree.html = 1735389234751
+C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\reports\apidocs\package-search-index.js = 1735389234768
+C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\reports\apidocs\search.html = 1735389234788
+C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\reports\apidocs\tag-search-index.js = 1735389234771
+C:\Users\canta\OneDrive\Escritorio\FP-DAM2\Acceso a datos\Trabajo de enfoque\TrabajoAccesoDatos\target\reports\apidocs\type-search-index.js = 1735389234769

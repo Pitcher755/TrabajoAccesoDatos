@@ -9,15 +9,23 @@ import java.io.File;
 
 /**
  * Clase principal que sirve como punto de entrada para la aplicación.
+ * Ejecuta el procesamiento de datos completo.
  * 
  * @author JFG
  */
 public class Aplicacion {
+
+    /**
+     * Constructor por defecto sin inicialización.
+     */
+    public Aplicacion() {
+        // Constructor por defecto
+    }
     
     /**
      * Método principal que inicia el programa.
      * 
-     * @param args 
+     * @param args Argumentos de línea de comandos
      */
     public static void main(String[] args) {
         // Define las rutas de los archivos XML de entrada y salida.

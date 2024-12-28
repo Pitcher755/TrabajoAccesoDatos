@@ -6,7 +6,7 @@ package ServiciosTest;
 
 import AccesoDatos.ContratoAD;
 import Servicios.ProcesadorContrato;
-import configuracion.ConexionBaseDatos;
+import AccesoDatos.ConexionBaseDatos;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,9 +41,6 @@ public class ProcesadorContratoTest {
 
         // Limpiar la base de datos antes de cada prueba.
         limpiarBaseDatos();
-
-        // Crear un archivo XML de entrada para las pruebas
-       // crearArchivoEntrada();
     }
 
     /**
@@ -55,8 +52,7 @@ public class ProcesadorContratoTest {
         // Limpiar la base de datos despues de cada prueba
         limpiarBaseDatos();
 
-        // Eliminar arcchivos de entrada y salida
-        //eliminarArchivo(ARCHIVO_ENTRADA);
+        // Eliminar arcchivo de salida
         eliminarArchivo(ARCHIVO_SALIDA);
     }
 
@@ -111,52 +107,6 @@ public class ProcesadorContratoTest {
             }
         }
     }
-
-    /**
-     * Crea un archivo XML de entrada con datos de prueba.
-     */
-   /* private void crearArchivoEntrada() {
-        String contenidoXML = """
-            <?xml version="1.0" encoding="UTF-8"?>
-            <contratos>
-                <Row>
-                    <Cell><Data>NIF</Data></Cell>
-                    <Cell><Data>Empresa</Data></Cell>
-                    <Cell><Data>Descripción</Data></Cell>
-                    <Cell><Data>Tipo Contrato</Data></Cell>
-                    <Cell><Data>Fecha</Data></Cell>
-                    <Cell><Data>Precio</Data></Cell>
-                </Row>
-                <Row>
-                    <Cell><Data>12345678A</Data></Cell>
-                    <Cell><Data>Empresa1</Data></Cell>
-                    <Cell><Data>Descripción1</Data></Cell>
-                    <Cell><Data>Temporal</Data></Cell>
-                    <Cell><Data>2024-12-27</Data></Cell>
-                    <Cell><Data>1000.00</Data></Cell>
-                </Row>
-                <Row>
-                    <Cell><Data>87654321B</Data></Cell>
-                    <Cell><Data>Empresa2</Data></Cell>
-                    <Cell><Data>Descripción2</Data></Cell>
-                    <Cell><Data>Indefinido</Data></Cell>
-                    <Cell><Data>2024-12-27</Data></Cell>
-                    <Cell><Data>2000.00</Data></Cell>
-                </Row>
-            </contratos>
-        """;
-
-        try {
-            File archivo = new File(ARCHIVO_ENTRADA);
-            if (!archivo.exists()) {
-                archivo.createNewFile();
-            }
-            // Escribir el contenido del XML
-            java.nio.file.Files.writeString(archivo.toPath(), contenidoXML);
-        } catch (Exception e) {
-            fail("Error al crear el archivo de entrada para las pruebas: " + e.getMessage());
-        }
-    }*/
 
     /**
      * Elimina un archivo si existe.
